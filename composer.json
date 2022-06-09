@@ -13,18 +13,15 @@
             "Dadapas\\CacheTests\\": "tests/"
         }
     },
-    "providers": {
-        "acme/foo": {
-            "sha256": "38968de1305c2e17f4de33aea164515bc787c42c7e2d6e25948539a14268bb82"
-        },
-        "acme/bar": {
-            "sha256": "4dd24c930bd6e1103251306d6336ac813b563a220d9ca14f4743c032fb047233"
-        }
+    "provide": {
+        "psr/cache-implementation": "1.0|2.0",
+        "psr/simple-cache-implementation": "1.0|2.0"
     },
     "authors": [
         {
             "name": "TOVOHERY",
-            "email": "tovoherypascal@gmail.com"
+            "email": "tovoherypascal@gmail.com",
+            "role": "Developer"
         }
     ],
     "minimum-stability": "dev",
