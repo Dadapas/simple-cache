@@ -19,14 +19,21 @@ class FileCacheAdapter implements CacheAdapterInterface
 
 	public function __construct(string $path)
 	{
+		$this->checkPath($path);
 		$this->path = $path;
+	}
+
+	protected function checkPath(string $path)
+	{
+		if ( ! is_writable($path."/{$this->file}") )
+			throw new CacheException("Folder is not writable for the cache.");
+
+		if ( ! file_exists($path."/{$this->file}") )
+			file_put_contents($path."/{$this->file}", "");
 	}
 
 	public function getContents()
 	{
-		if ( ! file_exists($this->path."/{$this->file}") )
-			file_put_contents($this->path."/{$this->file}", "");
-
 		return file_get_contents($this->path . "/{$this->file}");
 	}
 
