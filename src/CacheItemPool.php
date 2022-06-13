@@ -41,6 +41,34 @@ class CacheItemPool implements CacheItemPoolInterface
 		$this->adapter->update($this->items);
 	}
 
+	/**
+	 * Get the item from
+	 *
+	 * @param string $key
+	 * @param callable|callback $callback take $cacheItem param and return $cacheItem
+	 *
+	 * @return mixed the cache item value
+	*/
+	public function get($key, callable $callback)
+	{
+		$cacheItem = $this->getItem($key);
+
+		if (is_null($cacheItem))
+		{
+			$cacheItem = new CacheItem($key);
+			$cacheItem->expire();
+		}
+
+		// True when it's invalid
+		if ($cacheItem->isHit())
+		{
+			$cacheItem = $callback($cacheItem);
+			$this->save($cacheItem);
+		}
+
+		return $cacheItem->get();
+	}
+
 	public function put($key, $value, DateTimeInterface $date = null)
 	{
 		$this->checkExistanceOfAdapter();

@@ -15,7 +15,7 @@ final class CachesTest extends TestCase
 
 	/**
 	 * @before
-	*/ 
+	*/
 	protected function setFirst()
 	{
 		$this->path = dirname(__DIR__)."/cache";
@@ -79,7 +79,7 @@ final class CachesTest extends TestCase
 		$this->pool->save($cache);
 
 		$cacheItem = $this->pool->getItem($key);
-		
+
 		$this->assertTrue($cacheItem->isHit(), "this is an expired cache");
 
 		$this->assertEquals(null, $cacheItem->get());
@@ -93,7 +93,7 @@ final class CachesTest extends TestCase
 		$keys = ['token', 'another'];
 
 		$caches = $this->pool->getItems($keys);
-		
+
 		$this->assertEquals('array', gettype($caches), '$caches is an array');
 
 		$this->assertArrayHasKey('token', $caches);
@@ -115,7 +115,7 @@ final class CachesTest extends TestCase
 		$this->pool->save($cache);
 
 		$cacheItem = $this->pool->getItem($key);
-		
+
 		$this->assertTrue($cacheItem->isHit(), "this is an expired cache");
 
 		// Expires after one hours
@@ -127,10 +127,26 @@ final class CachesTest extends TestCase
 		$this->assertEquals($md5, $cacheItem->get(), "the item will remind the same value");
 	}
 
-	public function test_clear_cache()
+	public function test_with_callback()
+	{
+		$accessToken = $this->pool->get('AccessToken', function($cacheItem){
+
+			// Expires after 5 second
+			$cacheItem->expiresAfter(5);
+			echo "Renew the cache item";
+
+			$cacheItem->set("mytoken");
+
+			return $cacheItem;
+		});
+
+		$this->assertEquals("mytoken", $accessToken);
+	}
+
+	/*public function test_clear_cache()
 	{
 		// clear all item
 		$this->pool->clear();
 		$this->assertEquals(null, $this->pool->getItem('anotherToken'), 'no cache in cache store');
-	}
+	}*/
 }
