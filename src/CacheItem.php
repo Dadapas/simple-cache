@@ -61,6 +61,11 @@ class CacheItem implements CacheItemInterface, Serializable
 		return $date->getTimestamp() < time();
 	}
 
+	public function isValid()
+	{
+		return ! $this->isHit();
+	}
+
 	public function set($value)
 	{
 		$this->value = $value;

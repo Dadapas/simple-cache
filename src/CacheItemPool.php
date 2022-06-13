@@ -120,7 +120,7 @@ class CacheItemPool implements CacheItemPoolInterface
 
 		if (array_key_exists($key, $this->items)){
 			$cacheItem = $this->items[$key];
-			return ! $cacheItem->isHit();
+			return $this->isValid();
 		}
 		return false;
 	}
