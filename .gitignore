@@ -2,3 +2,5 @@
 node_modules
 vendor
 index.php
+.phpunit.result.cache
+cache/
