@@ -107,6 +107,16 @@ class CacheItem implements CacheItemInterface, Serializable
 		return $this;
 	}
 
+	/**
+	 * Expires cache item
+	*/
+	public function expire()
+	{
+		$date = new DateTime();
+		$date->sub(new DateInterval("P2Y"));
+		$this->expiresAt($date);
+	}
+
 	public function serialize()
 	{
 		return serialize([
