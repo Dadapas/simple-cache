@@ -128,19 +128,21 @@ final class CachesTest extends TestCase
 	}
 
 	public function test_with_callback()
-	{
-		$accessToken = $this->pool->get('AccessToken', function($cacheItem){
+	{	
+		$tokenString = hash("haval256,3", "password");
+
+		$accessToken = $this->pool->get('AccessToken', function($cacheItem) use ($tokenString) {
 
 			// Expires after 5 second
 			$cacheItem->expiresAfter(5);
-			echo "Renew the cache item";
+			echo "Renew the cache item".PHP_EOL;
 
-			$cacheItem->set("mytoken");
+			$cacheItem->set($tokenString);
 
 			return $cacheItem;
 		});
-
-		$this->assertEquals("mytoken", $accessToken);
+		echo $accessToken;
+		$this->assertEquals($tokenString, $accessToken);
 	}
 
 	/*public function test_clear_cache()
