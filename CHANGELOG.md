@@ -2,7 +2,8 @@
 ===================
 
     * `get` function to pool
-    * add `isValid` method for CacheItem 
+    * add `isValid` method for CacheItem
+    * add `expire` cache automaticly to CacheItem
 
 1.0.0 / 2022-06-13
 ===================
