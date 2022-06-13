@@ -76,7 +76,7 @@ class CacheItemPool implements CacheItemPoolInterface
 		$cacheItem = $this->getItem($key);
 
 		if ($cacheItem == null){
-			$cacheItem = new CacheItem;
+			$cacheItem = new CacheItem($key);
 		}
 
 		$cacheItem->set($value);
