@@ -16,7 +16,10 @@ use Psr\Cache\CacheItemInterface;
 use DateTimeInterface;
 use DateTime;
 
-
+/**
+ * Responsible for generating CacheItem
+ * Take some adapter interface as constructor iterface
+*/ 
 class CacheItemPool implements CacheItemPoolInterface
 {
 	protected $items;
@@ -148,7 +151,7 @@ class CacheItemPool implements CacheItemPoolInterface
 
 		if (array_key_exists($key, $this->items)){
 			$cacheItem = $this->items[$key];
-			return $this->isValid();
+			return $cacheItem->isValid();
 		}
 		return false;
 	}
