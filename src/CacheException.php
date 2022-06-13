@@ -13,5 +13,7 @@ namespace Dadapas\Cache;
 
 use Psr\Cache\CacheException;
 use Exception;
-
+/**
+ * Must be thrown if cache exception
+ */
 class CacheException extends Exception implements CacheException {}

@@ -15,15 +15,16 @@ interface CacheAdapterInterface
 	/**
 	 * Get key value of all element get by adapter
 	 * an empty array instead
-	 * 
+	 *
 	 * @return array
 	*/
 	public function charge();
 
 	/**
 	 * Update the element to the store
-	 * 
+	 *
 	 * @param array $items key value of elements
-	*/ 
+	 * @return bool True if update was going perfectly
+	*/
 	public function update(array $items);
 }

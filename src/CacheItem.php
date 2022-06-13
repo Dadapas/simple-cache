@@ -16,7 +16,10 @@ use DateTimeInterface;
 use DateTime;
 use DateInterval;
 use Serializable;
-
+/**
+ * Implemetation of \Psr\Cache\CacheItemInterface
+ * Hold the data of the cache
+ */
 class CacheItem implements CacheItemInterface, Serializable
 {
 	protected $key;
@@ -41,6 +44,10 @@ class CacheItem implements CacheItemInterface, Serializable
 		$this->expiration = $date->format($this->format);
 	}
 
+	/**
+	 * Get the key of cache item
+	 * @return string get current key
+	 */
 	public function getKey()
 	{
 		return $this->key;
@@ -76,9 +83,9 @@ class CacheItem implements CacheItemInterface, Serializable
 	/**
      * Sets the expiration time for this cache item.
      *
-     * 
+     *
      * @param int $expiration number of seconds Ex: 60 will expire after one minute
-     * 
+     *
      * @return static
      *   The called object.
      */
@@ -94,7 +101,7 @@ class CacheItem implements CacheItemInterface, Serializable
 
 	/**
 	 * Set the expiration date expire after a seconds
-	 * 
+	 *
 	 * @param int $time in second
 	*/
 	public function expiresAfter($time)
@@ -108,7 +115,7 @@ class CacheItem implements CacheItemInterface, Serializable
 	}
 
 	/**
-	 * Expires cache item
+	 * Expires automatictly the cache item
 	*/
 	public function expire()
 	{
